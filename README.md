@@ -12,8 +12,8 @@ gantt
     [fix static files]          :done,   Friday, 2023-07-28, 2d
 
     section Event 2
-    [finalize successful page]  :active, 2023-07-30, 2d
+    [finalize successful page, 2023-07-30]  :active, 2023-07-30, 2d
 
     section Event 3
-    [make and add fohr logo]    :active, 2023-08-01, 2d
+    [make and add fohr logo, 2023-08-01]    :active, 2023-08-01, 2d
 ```
