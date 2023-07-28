@@ -1,4 +1,4 @@
-
+{
 "builds": [{
     "src": "klister/wsgi.py",
     "use": "@vercel/python",
