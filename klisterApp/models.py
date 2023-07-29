@@ -16,3 +16,11 @@ class formPage(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class password(models.Model):
+    password = models.CharField(max_length=100)
+
+
+class FilePath(models.Model):
+    path = models.CharField(max_length=1024)
