@@ -3,10 +3,12 @@
 
 {% block content %}
 <div class="d-flex justify-content-end">
-    <button type="button" class="btn btn-outline-secondary ml-auto" data-bs-toggle="modal" data-bs-target="#pathModal">
+    <button type="button" class="btn btn-outline-secondary ml-auto" data-bs-toggle="modal"
+        data-bs-target="#pathModal">
         File: {{ filePath }}
     </button>
-    <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal" data-bs-target="#passwordModal">
+    <button type="button" class="btn btn-outline-secondary ml-2" data-bs-toggle="modal"
+        data-bs-target="#passwordModal">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
             class="bi bi-shield-lock-fill" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -18,69 +20,72 @@
 {% include 'pathModal.html' %}
 {% include 'passwordModal.html' %}
 
-<div class="text-center pr-4">
-    <img src="{% static 'tjej.png' %}" class="rounded" alt="..." width="300">
+<div class="row justify-content-center pr-4">
+    <div class="col-md-6 col-lg-4">
+        <img src="{% static 'tjej.png' %}" class="rounded img-fluid" alt="...">
+    </div>
 </div>
 <div class="container-fluid">
-    <div class="d-flex justify-content-center">
-        <div class="text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="input-group mb-3 pt-3">
                     <label class="input-group-text" for="id_name">Namn</label>
-                    <input type="text" name="name" id="id_name" required>
+                    <input type="text" class="form-control" name="name" id="id_name" required>
                 </div>
 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="id_age">Ålder</label>
-                    <input type="number" name="age" id="id_age" required>
+                    <input type="number" class="form-control" name="age" id="id_age" required>
                 </div>
+
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="id_stadsdel" data-bs-toggle="popover" data-bs-placement="left"
                         title="Popover Title" data-bs-content="baby">Stadsdel</label>
-                    <input type="text" name="stadsdel" id="id_stadsdel" required>
+                    <input type="text" class="form-control" name="stadsdel" id="id_stadsdel" required>
                 </div>
                 <p class="lead pr-4" style="font-size: 12px;">
                     Du kan kolla <a
                         href="https://goteborg.se/wps/portal/start/kommun-och-politik/om-goteborg/stadsomraden-och-mellanomraden">här</a>
                     för att veta vilken är ditt stadsdel.
-                <p>
+                </p>
 
                 <div class="input-group mb-3 pt-1">
                     <label class="input-group-text" for="id_idrott">Idrott</label>
-                    <input type="text" name="idrott" id="id_idrott" required>
+                    <input type="text" class="form-control" name="idrott" id="id_idrott" required>
                 </div>
 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="id_önskad_idrott">Önskad Idrott</label>
-                    <input type="text" name="önskad_idrott" id="id_önskad_idrott" required>
+                    <input type="text" class="form-control" name="önskad_idrott" id="id_önskad_idrott" required>
                 </div>
 
-                <div class="form-check form-switch">
-                    <input type="checkbox" name="in_a_union" id="id_in_a_union">
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" name="in_a_union" id="id_in_a_union">
                     <label class="form-check-label" for="id_in_a_union">Förening?</label>
                 </div>
-                <br>
+
                 <button type="submit" class="btn btn-outline-success">Klar</button>
-                <br>
-                <br>
+
                 {% if message %}
-                    {% if is_error %}
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% else %}
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endif %}
+                {% if is_error %}
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% else %}
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
                 {% endif %}
             </form>
         </div>
     </div>
 </div>
+
 <br>
 <script src="{% static 'js/modalsAlerts.js' %}"></script>
 {% endblock %}
