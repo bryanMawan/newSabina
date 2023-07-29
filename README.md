@@ -1,19 +1,13 @@
-# Sabina Project
+# Project Name
 
-## Workflow Timeline
+## Workflow Checklist
 
-```mermaid
-%%{init: {'theme': 'neutral'}}%%
-gantt
-    dateFormat  YYYY-MM-DD
-    title Workflow Timeline
+- [x] Fix static files (Friday, 2023-07-28 to Sunday, 2023-07-30)
+- [ ] Finalize successful page (Monday, 2023-07-31 to Wednesday, 2023-08-02)
+- [ ] Make and add fohr logo (Thursday, 2023-08-03 to Saturday, 2023-08-05)
 
-    section Event 1
-    [fix static files]          :done,   Friday, 2023-07-28, 2d
+## About
 
-    section Event 2
-    [finalize successful page, 2023-07-30]  :active, 2023-07-30, 2d
+This is a project that demonstrates a workflow using a timeline diagram represented as a checklist.
 
-    section Event 3
-    [make and add fohr logo, 2023-08-01]    :active, 2023-08-01, 2d
-```
+<!-- Add more information about your project below -->
