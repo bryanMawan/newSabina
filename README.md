@@ -8,6 +8,7 @@
 - [x] create use and first page for filepath assigning (Thursday, 2023-08-03 to Saturday, 2023-08-05)
 - [ ] file path verification (Saturday, 2023-08-05 to Saturday, 2023-08-07)
 - [ ] gui file path choosing (Monday, 2023-08-07 to Saturday, 2023-08-09)
+- [ ] make base and home htmls grid compatible for phones
 
 
 ## About
