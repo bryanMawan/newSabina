@@ -41,9 +41,13 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <label class="input-group-text" for="id_stadsdel" data-bs-toggle="popover" data-bs-placement="left"
-                        title="Popover Title" data-bs-content="baby">Stadsdel</label>
-                    <input type="text" class="form-control" name="stadsdel" id="id_stadsdel" required>
+                    <label class="input-group-text" for="{{ form.stadsdel.id_for_label }}" data-bs-toggle="popover"
+                           data-bs-placement="left" title="Popover Title" data-bs-content="baby">Stadsdel</label>
+                    <select class="form-control" name="{{ form.stadsdel.html_name }}" id="{{ form.stadsdel.auto_id }}" {% if form.stadsdel.multiple %}multiple{% endif %}>
+                        {% for value, display_name in form.stadsdel.field.choices %}
+                            <option value="{{ value }}"{% if value in form.stadsdel.value %} selected{% endif %}>{{ display_name }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <p class="lead pr-sm-4" style="font-size: 12px;">
                     Du kan kolla <a
