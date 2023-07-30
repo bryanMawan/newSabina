@@ -8,4 +8,3 @@ urlpatterns = [
     path('change_password/', change_password, name='change_password'),
     path('success/', SuccessView.as_view(), name='success'),
     ]
-

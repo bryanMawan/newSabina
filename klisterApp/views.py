@@ -1,16 +1,16 @@
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import formPage, password, FilePath
+from .models import password, SpreadsheetId
 from .forms import formPageForm
 from django.views.generic import CreateView
-from .excel import add_row_to_excel, excel_password
+from .excel import add_row_to_google_sheets, extract_key_from_url, get_sheet_name
 from django.views.generic import TemplateView
 
 
 main_path = None  # Retrieve the first instance of the formPage model
 message = None
+
 
 class SuccessView(TemplateView):
     template_name = 'success.html'
@@ -20,13 +20,13 @@ def create_form(request):
     global message
     addRowConfirmation = None
     # Set a default value for filePath
-    filePath = None
+    spreadsheet_id = None
 
     # Retrieve the file path from the FilePath model
     try:
-        file_path_instance = FilePath.objects.get(pk=1)  # Assuming the FilePath instance has primary key 1
-        filePath = file_path_instance.path.split("/")[-1]
-    except FilePath.DoesNotExist:
+        spreadSheet_instance = SpreadsheetId.objects.get(pk=1)  # Assuming the FilePath instance has primary key 1
+        spreadsheet_id = spreadSheet_instance.IDString
+    except SpreadsheetId.DoesNotExist:
         pass  # Handle the case when the FilePath instance does not exist
     is_error = message and message.startswith(" ")
     if request.method == 'POST':
@@ -43,7 +43,7 @@ def create_form(request):
             }
             print(klisterData)
             try:
-                add_row_to_excel(filePath, klisterData)
+                add_row_to_google_sheets(spreadsheet_id, klisterData)
                 addRowConfirmation = klisterData['name'] + '(' + str(klisterData['age']) + ')' + " row added!"
                 # Redirect to the success URL using reverse
                 success_url = reverse('success')
@@ -58,7 +58,7 @@ def create_form(request):
     else:
         form = formPageForm()
 
-    return render(request, 'home.html', {'form': form, 'filePath': filePath, 'message': message, 'is_error': is_error})
+    return render(request, 'home.html', {'form': form, 'spreadsheet_id': get_sheet_name(spreadsheet_id), 'message': message, 'is_error': is_error})
 
 
 def change_filepath(request):
@@ -76,9 +76,9 @@ def change_filepath(request):
             message = " " + "Invalid password. Please try again."
             return HttpResponseRedirect("/")
         else:
-            file_path = request.POST.get('file_path')
+            spreadsheet_link = request.POST.get('spreadsheet_link')
             # Update or create the FilePath instance
-            file_path_instance, created = FilePath.objects.update_or_create(pk=1, defaults={'path': file_path})
+            file_path_instance, created = SpreadsheetId.objects.update_or_create(pk=1, defaults={'IDString': extract_key_from_url(spreadsheet_link)})
             message = 'File updated successfully.'
             return HttpResponseRedirect("/")
 

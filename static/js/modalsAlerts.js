@@ -1,3 +1,4 @@
+    
     // Get all alert elements
     const alerts = document.querySelectorAll('.alert');
 
