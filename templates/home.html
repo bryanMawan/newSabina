@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-end mb-4">
     <button type="button" class="btn btn-outline-secondary ml-auto" data-bs-toggle="modal"
         data-bs-target="#pathModal">
         File: {{ filePath }}
@@ -20,14 +20,14 @@
 {% include 'pathModal.html' %}
 {% include 'passwordModal.html' %}
 
-<div class="row justify-content-center pr-4">
-    <div class="col-md-6 col-lg-4">
+<div class="row justify-content-center pr-sm-4">
+    <div class="col-sm-6 col-md-4 mb-4" >
         <img src="{% static 'tjej.png' %}" class="rounded img-fluid" alt="...">
     </div>
 </div>
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
+        <div class="col-sm-8 col-md-6">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="input-group mb-3 pt-3">
@@ -45,7 +45,7 @@
                         title="Popover Title" data-bs-content="baby">Stadsdel</label>
                     <input type="text" class="form-control" name="stadsdel" id="id_stadsdel" required>
                 </div>
-                <p class="lead pr-4" style="font-size: 12px;">
+                <p class="lead pr-sm-4" style="font-size: 12px;">
                     Du kan kolla <a
                         href="https://goteborg.se/wps/portal/start/kommun-och-politik/om-goteborg/stadsomraden-och-mellanomraden">här</a>
                     för att veta vilken är ditt stadsdel.

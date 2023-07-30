@@ -2,14 +2,15 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Tjejsatsningen{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body data-bs-theme="dark">
-  <div class="container-fluid" style="padding-top: 100px;">
-    <main class="container text-center">
+  <div class="container-sm" style="padding-top: 100px;">
+    <main class="container-sm text-center">
       {% block content %}
       {% endblock %}
       {% include 'pathModal.html' %}
