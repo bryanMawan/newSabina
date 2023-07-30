@@ -42,12 +42,19 @@ def create_form(request):
                 'in_a_union': form.cleaned_data['in_a_union'],
             }
             print(klisterData)
-            add_row_to_excel(filePath, klisterData)
-            addRowConfirmation = klisterData['name'] + '(' + str(klisterData['age']) + ')' + " row added!"
-            
-            # Redirect to the success URL using reverse
-            success_url = reverse('success')
-            return redirect(success_url)
+            try:
+                add_row_to_excel(filePath, klisterData)
+                addRowConfirmation = klisterData['name'] + '(' + str(klisterData['age']) + ')' + " row added!"
+                # Redirect to the success URL using reverse
+                success_url = reverse('success')
+                return redirect(success_url)
+            except Exception as e:
+                if "Read-only file system" in str(e):
+                    message = " " + "Error: You do not have permission to write to this file"
+                else:
+                    message = " " + f"An error occurred: {str(e)}"
+                return redirect('home')  # Redirect back to the form page with the error message
+
     else:
         form = formPageForm()
 
