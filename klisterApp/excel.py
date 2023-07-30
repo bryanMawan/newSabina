@@ -5,7 +5,7 @@ import re
 def add_row_to_google_sheets(spreadsheet_id, data):
     # Authenticate with Google Sheets API using service account credentials
     try:
-        creds = gspread.service_account(filename='/Users/bryanmawan/Documents/SabinaGrejer/klisterDjango/newSabina/serviceAccount.json')
+        creds = gspread.service_account(filename='serviceAccount.json')
         print("Authenticated with Google Sheets API.")
     except gspread.exceptions.SpreadsheetNotFound:
         print("Google Sheets file not found. Make sure the file exists or create a new one.")
@@ -43,7 +43,7 @@ def add_row_to_google_sheets(spreadsheet_id, data):
 def get_sheet_name(spreadsheet_id):
     # Authenticate with Google Sheets API using service account credentials
     try:
-        creds = gspread.service_account(filename='/Users/bryanmawan/Documents/SabinaGrejer/klisterDjango/newSabina/serviceAccount.json')
+        creds = gspread.service_account(filename='serviceAccount.json')
         print("Authenticated with Google Sheets API.")
     except gspread.exceptions.SpreadsheetNotFound:
         print("Google Sheets file not found. Make sure the file exists or create a new one.")
