@@ -25,8 +25,7 @@ def create_form(request):
     # Retrieve the file path from the FilePath model
     try:
         spreadSheet_instance = SpreadsheetId.objects.get(pk=1)  # Assuming the FilePath instance has primary key 1
-        spreadsheet_url = spreadSheet_instance.IDString
-        spreadsheet_id = extract_key_from_url(spreadsheet_url)
+        spreadsheet_id = spreadSheet_instance.IDString
     except SpreadsheetId.DoesNotExist:
         pass  # Handle the case when the FilePath instance does not exist
     is_error = message and message.startswith(" ")
@@ -59,7 +58,7 @@ def create_form(request):
     else:
         form = formPageForm()
 
-    return render(request, 'home.html', {'form': form, 'spreadsheet_id': get_sheet_name(spreadsheet_url), 'message': message, 'is_error': is_error})
+    return render(request, 'home.html', {'form': form, 'spreadsheet_id': get_sheet_name(spreadsheet_id), 'message': message, 'is_error': is_error})
 
 
 def change_filepath(request):
@@ -79,7 +78,7 @@ def change_filepath(request):
         else:
             spreadsheet_link = request.POST.get('spreadsheet_link')
             # Update or create the FilePath instance
-            file_path_instance, created = SpreadsheetId.objects.update_or_create(pk=1, defaults={'IDString': spreadsheet_link})
+            file_path_instance, created = SpreadsheetId.objects.update_or_create(pk=1, defaults={'IDString': extract_key_from_url(spreadsheet_link)})
             message = 'File updated successfully.'
             return HttpResponseRedirect("/")
 
