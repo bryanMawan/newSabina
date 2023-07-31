@@ -48,7 +48,7 @@ def add_row_to_google_sheets(spreadsheet_id, data, sheet_id):
 
 def get_sheet_name(spreadsheet_key, sheet_id):
     # Authenticate with the service account
-    creds = gspread.service_account(filename='/Users/bryanmawan/Documents/SabinaGrejer/klisterDjango/newSabina/serviceAccount.json')
+    creds = gspread.service_account(filename='serviceAccount.json')
     # Open the spreadsheet using the key
     title = ""
     try:
