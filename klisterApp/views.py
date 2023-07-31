@@ -34,12 +34,12 @@ def create_form(request):
         print("posting")
         if form.is_valid():
             klisterData = {
-                'name': form.cleaned_data['name'],
-                'age': form.cleaned_data['age'],
-                'stadsdel': form.cleaned_data['stadsdel'],
+                'Namn': form.cleaned_data['name'],
+                'Ålder': form.cleaned_data['age'],
+                'Stadsdel': form.cleaned_data['stadsdel'],
                 'idrott': form.cleaned_data['idrott'],
                 'önskad_idrott': form.cleaned_data['önskad_idrott'],
-                'in_a_union': form.cleaned_data['in_a_union'],
+                'Förening': form.cleaned_data['in_a_union'],
             }
             print(klisterData)
             try:
