@@ -24,3 +24,4 @@ class password(models.Model):
 
 class SpreadsheetId(models.Model):
     IDString = models.CharField(max_length=1024)
+    gid = models.CharField(max_length=1024)

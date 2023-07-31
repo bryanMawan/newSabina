@@ -2,7 +2,7 @@ import gspread
 import re
 
 
-def add_row_to_google_sheets(spreadsheet_id, data):
+def add_row_to_google_sheets(spreadsheet_id, data, sheet_id):
     # Authenticate with Google Sheets API using service account credentials
     try:
         creds = gspread.service_account(filename='serviceAccount.json')
@@ -12,8 +12,14 @@ def add_row_to_google_sheets(spreadsheet_id, data):
         return
 
     try:
+        ## for chatgpt
         # Open the Google Sheets file by its ID
-        sheet = creds.open_by_key(spreadsheet_id).sheet1
+        sheet_title = ""
+        spreadsheet = creds.open_by_key(spreadsheet_id)
+        for worksheet in spreadsheet.worksheets():
+            if worksheet.id == int(sheet_id):
+                sheet_title = worksheet.title
+        sheet = spreadsheet.worksheet(sheet_title)
         print("Google Sheets file opened.")
     except gspread.exceptions.WorksheetNotFound:
         print("Worksheet not found. Creating a new worksheet.")
@@ -40,37 +46,38 @@ def add_row_to_google_sheets(spreadsheet_id, data):
     print("Google Sheets updated.")
 
 
-def get_sheet_name(spreadsheet_id):
-    # Authenticate with Google Sheets API using service account credentials
+def get_sheet_name(spreadsheet_key, sheet_id):
+    # Authenticate with the service account
+    creds = gspread.service_account(filename='/Users/bryanmawan/Documents/SabinaGrejer/klisterDjango/newSabina/serviceAccount.json')
+    # Open the spreadsheet using the key
+    title = ""
     try:
-        creds = gspread.service_account(filename='serviceAccount.json')
-        print("Authenticated with Google Sheets API.")
-    except gspread.exceptions.SpreadsheetNotFound:
-        print("Google Sheets file not found. Make sure the file exists or create a new one.")
-        return None
+        spreadsheet = creds.open_by_key(spreadsheet_key)
 
-    try:
-        # Open the Google Sheets file by its ID
-        spreadsheet = creds.open_by_key(spreadsheet_id)
-        print("Google Sheets file opened.")
-        # Get the name of the first sheet in the spreadsheet
-        sheet_name = spreadsheet.get_worksheet(0).title
-        return sheet_name
-    except gspread.exceptions.WorksheetNotFound:
-        print("Worksheet not found.")
+        # Get the sheet by sheet ID (gid)
+        for worksheet in spreadsheet.worksheets():
+            if worksheet.id == int(sheet_id):
+                title += str(worksheet.title)
+        return title
+    except gspread.exceptions.APIError as e:
+        print(f"Error accessing the spreadsheet with URL: {spreadsheet_key}")
         return None
 
 
-def extract_key_from_url(url):
-    # Regular expression pattern to match the key in the Google Sheets URL
-    pattern = r'/spreadsheets/d/([a-zA-Z0-9-_]+)'
-    
-    # Search for the key using the pattern
-    match = re.search(pattern, url)
-    if match:
-        return match.group(1)
-    else:
-        return None
+def extract_key_and_gid(url):
+    # Extract the key from the URL
+    key_start = url.find("/d/") + 3
+    key_end = url.find("/", key_start)
+    key = url[key_start:key_end]
+
+    # Extract the gid from the URL
+    gid_start = url.find("gid=") + 4
+    gid_end = url.find("/", gid_start)
+    if gid_end == -1:  # If gid is the last parameter in the URL
+        gid_end = len(url)
+    gid = url[gid_start:gid_end]
+
+    return key, gid
 
 
 # Example usage
