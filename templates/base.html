@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html>
 
@@ -6,6 +9,8 @@
   <title>{% block title %}Tjejsatsningen{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/images.css' %}">
+
 </head>
 
 <body data-bs-theme="dark">
@@ -17,7 +22,9 @@
     </main>
     <div class="container text-center">
       <footer>
-        <p>&copy; Powered by colonFour™</p>
+        <p>&copy; Powered by 
+          <img src="{% static 'img/colonfour.png' %}" class="rounded custom-image" alt="...">
+        </p>
       </footer>
     </div>
   </div>

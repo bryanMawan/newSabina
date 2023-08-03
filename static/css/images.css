@@ -1,0 +1,6 @@
+/* static/css/image.css */
+.custom-image {
+    width: 43px; /* Set the desired width */
+    height: auto; /* Preserve aspect ratio */
+    /* Add any other styling properties you want */
+  }

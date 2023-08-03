@@ -1,5 +1,4 @@
 import gspread
-import re
 
 
 def add_row_to_google_sheets(spreadsheet_id, data, sheet_id):
